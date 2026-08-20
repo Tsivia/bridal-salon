@@ -25,6 +25,11 @@
  * },
  * fontFamily: { serif: ['"Cormorant Garamond"', 'Georgia', 'serif'], sans: ['Jost', 'system-ui', 'sans-serif'] },
  *
+ * ── assets ────────────
+ * Copy the 7 files from images/ into the project as public/images/
+ * (hero.jpg, gown-aurelie.jpg, gown-seraphine.jpg, gown-noor.jpg,
+ * gown-amalia.jpg, atelier.jpg, detail.jpg). Photography: Unsplash License.
+ *
  * ── index.html <head> ────────────────────────────────────────────────────────
  * <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
  */
@@ -76,104 +81,24 @@ const Rule = ({ className = "" }: { className?: string }) => (
   <div className={`h-px w-16 bg-gold/60 my-6 ${className}`} />
 );
 
-/* ── gown illustrations (placeholders for photography) ─────────────────────── */
+/* ── gown photography ──────────────────────────────────────────────────────── */
 type GownKey = "aline" | "ballgown" | "sheath" | "empire";
 
-function Gown({ variant }: { variant: GownKey }) {
-  const id = variant;
-  const palette: Record<GownKey, [string, string, string, string]> = {
-    aline: ["#F7F1E8", "#E8DCCB", "#FDFBF7", "#EFE5D6"],
-    ballgown: ["#F6EEEA", "#EADFD3", "#FFFDFA", "#F0E6DA"],
-    sheath: ["#F4F1EC", "#E4DCD0", "#FDFCF9", "#EDE6DB"],
-    empire: ["#F8F0EE", "#E8DDD6", "#FFFDFC", "#F1E8E1"],
-  };
-  const [bgA, bgB, dressA, dressB] = palette[variant];
+const GOWN_IMAGES: Record<GownKey, string> = {
+  aline: "/images/gown-aurelie.jpg",
+  ballgown: "/images/gown-seraphine.jpg",
+  sheath: "/images/gown-noor.jpg",
+  empire: "/images/gown-amalia.jpg",
+};
 
+function Gown({ variant, alt }: { variant: GownKey; alt: string }) {
   return (
-    <svg
-      viewBox="0 0 300 420"
-      preserveAspectRatio="xMidYMid slice"
-      role="img"
-      aria-label={`${variant} bridal gown illustration`}
-      className="h-full w-full transition-transform duration-700 ease-[cubic-bezier(.2,.7,.3,1)] group-hover:scale-[1.045]"
-    >
-      <defs>
-        <linearGradient id={`bg-${id}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={bgA} />
-          <stop offset="100%" stopColor={bgB} />
-        </linearGradient>
-        <linearGradient id={`dr-${id}`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={dressA} />
-          <stop offset="100%" stopColor={dressB} />
-        </linearGradient>
-      </defs>
-
-      <rect width="300" height="420" fill={`url(#bg-${id})`} />
-      <ellipse cx="150" cy="205" rx="122" ry="150" fill="#fff" opacity="0.4" />
-
-      <g stroke="#B99B6B" strokeWidth="1" strokeOpacity="0.5" fill={`url(#dr-${id})`}>
-        {variant === "aline" && (
-          <>
-            <path d="M133 195 L78 400 Q150 416 222 400 L167 195 Z" />
-            <path d="M118 98 C104 132 96 182 96 228 L110 233 C114 184 122 140 132 108 Z" />
-            <path d="M182 98 C196 132 204 182 204 228 L190 233 C186 184 178 140 168 108 Z" />
-            <path d="M118 96 L133 197 L167 197 L182 96 C170 87 130 87 118 96 Z" />
-            <path d="M138 78 h24 v20 h-24 Z" />
-          </>
-        )}
-        {variant === "ballgown" && (
-          <>
-            <path d="M132 188 C110 240 68 330 54 398 Q150 422 246 398 C232 330 190 240 168 188 Z" />
-            <path d="M118 98 C102 130 94 178 96 224 L111 228 C114 180 122 138 132 108 Z" />
-            <path d="M182 98 C198 130 206 178 204 224 L189 228 C186 180 178 138 168 108 Z" />
-            <path d="M118 96 L132 190 L168 190 L182 96 C170 87 130 87 118 96 Z" />
-            <path d="M137 72 h26 v26 h-26 Z" />
-          </>
-        )}
-        {variant === "sheath" && (
-          <>
-            <path d="M166 240 L206 402 Q186 410 172 400 Z" fill="#F5EEE4" />
-            <path d="M134 195 L120 398 Q150 410 180 398 L166 195 Z" />
-            <path d="M118 98 C110 134 106 184 106 230 L119 234 C122 186 126 142 132 110 Z" />
-            <path d="M182 98 C190 134 194 184 194 230 L181 234 C178 186 174 142 168 110 Z" />
-            <path d="M118 96 L134 197 L166 197 L182 96 C170 87 130 87 118 96 Z" />
-            <path d="M138 74 h24 v24 h-24 Z" />
-          </>
-        )}
-        {variant === "empire" && (
-          <>
-            <path d="M128 162 L86 400 Q150 418 214 400 L172 162 Z" />
-            <path d="M118 98 C90 128 80 190 96 220 C116 238 140 230 138 220 C124 198 124 138 134 106 Z" />
-            <path d="M182 98 C210 128 220 190 204 220 C184 238 160 230 162 220 C176 198 176 138 166 106 Z" />
-            <path d="M118 96 L128 164 L172 164 L182 96 C170 87 130 87 118 96 Z" />
-            <path d="M138 76 h24 v22 h-24 Z" />
-          </>
-        )}
-      </g>
-
-      <g stroke="#B99B6B" strokeOpacity="0.28" fill="none" strokeWidth="0.8">
-        <path d="M150 200 L150 410" />
-        {variant !== "sheath" && (
-          <>
-            <path d="M130 210 L100 400" />
-            <path d="M170 210 L200 400" />
-          </>
-        )}
-      </g>
-
-      {variant === "empire" && (
-        <g fill="#B99B6B" fillOpacity="0.35">
-          {[
-            [120, 230], [142, 252], [168, 238], [108, 300],
-            [150, 318], [192, 292], [126, 358], [178, 366],
-          ].map(([cx, cy]) => (
-            <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="1.6" />
-          ))}
-        </g>
-      )}
-
-      <circle cx="150" cy="64" r="14" fill={dressB} stroke="#B99B6B" strokeOpacity="0.4" />
-    </svg>
+    <img
+      src={GOWN_IMAGES[variant]}
+      alt={alt}
+      loading="lazy"
+      className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(.2,.7,.3,1)] group-hover:scale-[1.05]"
+    />
   );
 }
 
@@ -330,26 +255,16 @@ export default function MaisonEliane() {
         className="relative grid min-h-[100dvh] place-items-center overflow-hidden px-0 pb-20 pt-36 text-center text-ivory"
         style={{ background: "radial-gradient(120% 90% at 50% 0%, hsl(30 14% 34%) 0%, hsl(28 13% 22%) 45%, hsl(28 14% 15%) 100%)" }}
       >
-        <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden className="pointer-events-none absolute inset-0 h-full w-full opacity-55">
-          <defs>
-            <linearGradient id="veil" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#E8DCCB" stopOpacity="0.22" />
-              <stop offset="100%" stopColor="#E8DCCB" stopOpacity="0" />
-            </linearGradient>
-            <linearGradient id="veil2" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#F1E4E0" stopOpacity="0.16" />
-              <stop offset="100%" stopColor="#B99B6B" stopOpacity="0.05" />
-            </linearGradient>
-          </defs>
-          <ellipse cx="720" cy="120" rx="760" ry="440" fill="url(#veil)" />
-          <path d="M0,700 C260,600 420,820 720,760 C1010,700 1180,860 1440,780 L1440,900 L0,900 Z" fill="url(#veil2)" />
-          <g stroke="#E8DCCB" strokeOpacity="0.16" fill="none">
-            <path d="M120,0 C260,240 200,520 340,900" />
-            <path d="M1320,0 C1180,240 1240,520 1100,900" />
-            <path d="M420,0 C520,300 480,600 560,900" strokeOpacity="0.09" />
-            <path d="M1020,0 C920,300 960,600 880,900" strokeOpacity="0.09" />
-          </g>
-        </svg>
+        <img
+          src="/images/hero.jpg"
+          alt="Bride in a long-sleeved lace gown holding a bouquet"
+          fetchPriority="high"
+          className="absolute inset-0 h-full w-full object-cover object-[50%_28%]"
+        />
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{ background: "linear-gradient(180deg,hsl(28 14% 10% / .78) 0%,hsl(28 14% 12% / .52) 38%,hsl(28 14% 10% / .74) 78%,hsl(28 14% 10% / .9) 100%)" }}
+        />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[32%] bg-gradient-to-t from-ivory to-transparent" />
 
         <Reveal className="relative z-10 mx-auto max-w-[52rem] px-6">
@@ -416,7 +331,7 @@ export default function MaisonEliane() {
                     <span className="absolute left-4 top-4 z-10 bg-ivory/90 px-3 py-1.5 text-[0.56rem] uppercase tracking-[0.22em] text-gold-deep">
                       {g.tag}
                     </span>
-                    <Gown variant={g.key} />
+                    <Gown variant={g.key} alt={g.name + " — " + g.meta} />
                   </figure>
                   <div className="border-t border-hairline bg-ivory px-6 pb-7 pt-6">
                     <h3 className="font-serif text-[1.75rem] font-light leading-tight">{g.name}</h3>
@@ -464,23 +379,9 @@ export default function MaisonEliane() {
       <section id="atelier" className="py-[clamp(5rem,11vw,9.5rem)]">
         <div className="mx-auto grid w-[min(1200px,100%-3rem)] grid-cols-1 items-center gap-[clamp(2.5rem,6vw,5.5rem)] lg:grid-cols-2">
           <Reveal>
-            <div className="relative grid aspect-[4/5] place-items-center overflow-hidden border border-hairline bg-[linear-gradient(160deg,hsl(var(--blush)),hsl(var(--cream))_55%,hsl(var(--sand)))]">
-              <div className="pointer-events-none absolute inset-[14px] border border-gold/35" />
-              <svg viewBox="0 0 300 380" role="img" aria-label="Atelier dress form" className="w-[78%]">
-                <g stroke="#B99B6B" strokeOpacity="0.55" fill="none" strokeWidth="1.2">
-                  <path
-                    d="M150 40 C120 60 112 100 118 130 C124 162 108 190 108 214 C108 250 128 268 150 268 C172 268 192 250 192 214 C192 190 176 162 182 130 C188 100 180 60 150 40 Z"
-                    fill="#FFFDFA"
-                    fillOpacity="0.8"
-                  />
-                  <path d="M150 268 L150 340" />
-                  <path d="M118 348 h64" />
-                  <path d="M124 140 h52" />
-                  <path d="M120 176 h60" />
-                  <path d="M150 44 L150 268" strokeOpacity="0.3" />
-                  <circle cx="150" cy="308" r="9" />
-                </g>
-              </svg>
+            <div className="relative aspect-[4/5] overflow-hidden border border-hairline bg-sand">
+              <div className="pointer-events-none absolute inset-[14px] z-10 border border-ivory/45" />
+              <img src="/images/atelier.jpg" alt="Bride in a high-neck lace gown with long sleeves" loading="lazy" className="h-full w-full object-cover" />
             </div>
           </Reveal>
 
@@ -526,23 +427,9 @@ export default function MaisonEliane() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="relative grid aspect-square place-items-center overflow-hidden border border-hairline bg-[linear-gradient(150deg,hsl(var(--cream)),hsl(var(--blush))_60%,hsl(var(--sand)))]">
-              <div className="pointer-events-none absolute inset-[14px] border border-gold/35" />
-              <svg viewBox="0 0 300 300" role="img" aria-label="Hand-stitch detail" className="w-[78%]">
-                <g stroke="#B99B6B" strokeOpacity="0.5" fill="none" strokeWidth="1.1">
-                  <circle cx="150" cy="150" r="96" />
-                  <circle cx="150" cy="150" r="72" strokeOpacity="0.3" />
-                  <path d="M78 150 C110 118 190 182 222 150" />
-                  <path d="M78 174 C110 142 190 206 222 174" strokeOpacity="0.35" />
-                  <path d="M78 126 C110 94 190 158 222 126" strokeOpacity="0.35" />
-                </g>
-                <g fill="#B99B6B" fillOpacity="0.4">
-                  <circle cx="150" cy="54" r="2.4" />
-                  <circle cx="246" cy="150" r="2.4" />
-                  <circle cx="150" cy="246" r="2.4" />
-                  <circle cx="54" cy="150" r="2.4" />
-                </g>
-              </svg>
+            <div className="relative aspect-square overflow-hidden border border-hairline bg-sand">
+              <div className="pointer-events-none absolute inset-[14px] z-10 border border-ivory/45" />
+              <img src="/images/detail.jpg" alt="Hand-worked lace detail on a bridal sleeve" loading="lazy" className="h-full w-full object-cover" />
             </div>
           </Reveal>
         </div>
