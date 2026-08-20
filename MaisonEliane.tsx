@@ -252,33 +252,40 @@ export default function MaisonEliane() {
       {/* HERO */}
       <section
         id="top"
-        className="relative grid min-h-[100dvh] place-items-center overflow-hidden px-0 pb-20 pt-36 text-center text-ivory"
+        className="relative grid min-h-[100dvh] place-items-center overflow-hidden px-0 pb-20 pt-36 text-center text-ivory lg:justify-items-start lg:text-left"
         style={{ background: "radial-gradient(120% 90% at 50% 0%, hsl(30 14% 34%) 0%, hsl(28 13% 22%) 45%, hsl(28 14% 15%) 100%)" }}
       >
         <img
           src="/images/hero.jpg"
           alt="Bride in a long-sleeved lace gown holding a bouquet"
           fetchPriority="high"
-          className="absolute inset-0 h-full w-full object-cover object-[50%_28%]"
+          className="absolute inset-0 h-full w-full object-cover object-[50%_28%] lg:object-[70%_22%]"
         />
         <div
-          className="pointer-events-none absolute inset-0"
+          className="pointer-events-none absolute inset-0 lg:hidden"
           style={{ background: "linear-gradient(180deg,hsl(28 14% 10% / .78) 0%,hsl(28 14% 12% / .52) 38%,hsl(28 14% 10% / .74) 78%,hsl(28 14% 10% / .9) 100%)" }}
         />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[32%] bg-gradient-to-t from-ivory to-transparent" />
+        <div
+          className="pointer-events-none absolute inset-0 hidden lg:block"
+          style={{
+            background:
+              "linear-gradient(100deg,hsl(28 14% 8% / .92) 0%,hsl(28 14% 9% / .82) 30%,hsl(28 14% 10% / .55) 50%,hsl(28 14% 10% / .12) 76%,hsl(28 14% 10% / .38) 100%),linear-gradient(to top,hsl(28 14% 10% / .78) 0%,transparent 32%)",
+          }}
+        />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-[11%] bg-gradient-to-t from-ivory from-[8%] to-transparent" />
 
-        <Reveal className="relative z-10 mx-auto max-w-[52rem] px-6">
+        <Reveal className="relative z-10 mx-auto max-w-[52rem] px-6 lg:mx-0 lg:max-w-[40rem] lg:px-0 lg:ml-[max(1.5rem,calc((100vw-1200px)/2))]">
           <Eyebrow className="text-champagne">Bridal Atelier · Established 2012</Eyebrow>
-          <h1 className="mt-6 font-serif text-[clamp(2.9rem,8.2vw,6.4rem)] font-light leading-[1.02] tracking-[-0.01em]">
+          <h1 className="mt-6 font-serif text-[clamp(2.9rem,8.2vw,6.4rem)] font-light leading-[1.02] tracking-[-0.01em] lg:text-[clamp(3.2rem,5.4vw,5rem)]">
             Modest by design.
             <br />
             <em className="italic text-champagne">Radiant</em> by nature.
           </h1>
-          <p className="mx-auto mt-8 max-w-[34rem] text-[clamp(0.95rem,1.5vw,1.08rem)] leading-[1.9] text-ivory/[0.78]">
+          <p className="mx-auto mt-8 max-w-[34rem] text-[clamp(0.95rem,1.5vw,1.08rem)] leading-[1.9] text-ivory/[0.86] lg:mx-0 lg:max-w-[31rem]">
             Hand-finished gowns for the bride who wants to be seen for herself. Full coverage, exquisite fabric, and a
             silhouette cut for no one else.
           </p>
-          <div className="mt-11 flex flex-wrap justify-center gap-4">
+          <div className="mt-11 flex flex-wrap justify-center gap-4 lg:justify-start">
             <Button asChild className="rounded-sm border border-ivory/50 bg-transparent px-9 py-6 text-[0.72rem] uppercase tracking-[0.22em] text-ivory hover:bg-ivory hover:text-ink">
               <a href="#visit">Book a Private Fitting</a>
             </Button>
@@ -326,17 +333,17 @@ export default function MaisonEliane() {
           <div className="mt-16 grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-[clamp(1.2rem,2.6vw,2.2rem)]">
             {GOWNS.map((g, i) => (
               <Reveal key={g.name} delay={(i % 4) * 90}>
-                <article className="group h-full overflow-hidden rounded-sm border border-hairline bg-cream transition-all duration-500 ease-[cubic-bezier(.2,.7,.3,1)] hover:-translate-y-2 hover:border-champagne hover:shadow-[0_24px_60px_-28px_hsl(30_20%_30%/.34)]">
+                <article className="group flex h-full flex-col overflow-hidden rounded-sm border border-hairline bg-cream transition-all duration-500 ease-[cubic-bezier(.2,.7,.3,1)] hover:-translate-y-2 hover:border-champagne hover:shadow-[0_24px_60px_-28px_hsl(30_20%_30%/.34)]">
                   <figure className="relative m-0 aspect-[3/4] overflow-hidden">
                     <span className="absolute left-4 top-4 z-10 bg-ivory/90 px-3 py-1.5 text-[0.56rem] uppercase tracking-[0.22em] text-gold-deep">
                       {g.tag}
                     </span>
                     <Gown variant={g.key} alt={g.name + " — " + g.meta} />
                   </figure>
-                  <div className="border-t border-hairline bg-ivory px-6 pb-7 pt-6">
+                  <div className="flex flex-1 flex-col border-t border-hairline bg-ivory px-6 pb-7 pt-6">
                     <h3 className="font-serif text-[1.75rem] font-light leading-tight">{g.name}</h3>
                     <div className="mt-2 text-[0.68rem] uppercase tracking-[0.16em] text-muted-ink">{g.meta}</div>
-                    <div className="mt-5 flex items-baseline justify-between gap-4 border-t border-hairline pt-4">
+                    <div className="mt-auto flex items-baseline justify-between gap-4 border-t border-hairline pt-4">
                       <span className="font-serif text-[1.25rem]">{g.price}</span>
                       <a href="#visit" className="whitespace-nowrap text-[0.63rem] uppercase tracking-[0.2em] text-gold-deep">
                         Enquire →
