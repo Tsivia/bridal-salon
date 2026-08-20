@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Maison Éliane — Modest Bridal Atelier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:hsl(38 44% 97%);
+  --cream:hsl(36 33% 93%);
+  --sand:hsl(33 28% 86%);
+  --champagne:hsl(34 30% 78%);
+  --blush:hsl(18 32% 92%);
+  --gold:hsl(36 32% 57%);
+  --gold-deep:hsl(34 30% 46%);
+  --ink:hsl(30 12% 18%);
+  --muted:hsl(30 8% 42%);
+  --line:hsl(33 22% 84%);
+  --shadow:0 24px 60px -28px hsl(30 20% 30% / .34);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ivory);color:var(--ink);
+  font-family:'Jost',system-ui,sans-serif;font-weight:300;
+  font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;letter-spacing:.005em}
+img,svg{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1200px,100% - 3rem);margin-inline:auto}
+.eyebrow{
+  font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--gold-deep);font-weight:400;margin:0;
+}
+.rule{width:64px;height:1px;background:var(--gold);opacity:.6;margin:1.4rem 0}
+.rule.center{margin-inline:auto}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.7rem;
+  padding:1rem 2.3rem;border:1px solid var(--ink);background:var(--ink);color:var(--ivory);
+  font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;font-weight:400;
+  cursor:pointer;transition:.45s cubic-bezier(.2,.7,.3,1);border-radius:2px;
+  font-family:'Jost',sans-serif;
+}
+.btn:hover{background:transparent;color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--ink);background:var(--ink);color:var(--ivory)}
+.btn.light{background:transparent;color:var(--ivory);border-color:hsl(38 44% 97% / .5)}
+.btn.light:hover{background:var(--ivory);color:var(--ink);border-color:var(--ivory)}
+
+/* ---------- nav ---------- */
+header{
+  position:fixed;inset:0 0 auto 0;z-index:60;
+  transition:background .5s ease,box-shadow .5s ease,padding .5s ease;
+  padding:1.6rem 0;
+}
+header.solid{background:hsl(38 44% 97% / .93);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line);padding:.9rem 0}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.brand{font-family:'Cormorant Garamond',serif;font-size:1.5rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ivory);transition:color .5s;line-height:1.1}
+.brand small{display:block;font-family:'Jost',sans-serif;font-size:.53rem;letter-spacing:.42em;opacity:.75;margin-top:.2rem}
+header.solid .brand{color:var(--ink)}
+.menu{display:flex;gap:2.4rem;align-items:center}
+.menu a{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:hsl(38 44% 97% / .88);position:relative;padding-bottom:3px;transition:color .5s}
+.menu a::after{content:'';position:absolute;left:0;bottom:0;height:1px;width:0;background:currentColor;transition:width .4s ease}
+.menu a:hover::after{width:100%}
+header.solid .menu a{color:var(--muted)}
+header.solid .menu a:hover{color:var(--ink)}
+.nav>.btn{padding:.72rem 1.5rem}
+.burger{display:none;background:none;border:0;cursor:pointer;padding:.4rem}
+.burger span{display:block;width:24px;height:1px;background:var(--ivory);margin:6px 0;transition:.4s}
+header.solid .burger span{background:var(--ink)}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:100dvh;display:grid;place-items:center;
+  text-align:center;color:var(--ivory);overflow:hidden;padding:9rem 0 5rem;
+  background:radial-gradient(120% 90% at 50% 0%, hsl(30 14% 34%) 0%, hsl(28 13% 22%) 45%, hsl(28 14% 15%) 100%);
+}
+.hero::after{
+  content:'';position:absolute;inset:auto 0 0 0;height:32%;
+  background:linear-gradient(to top,var(--ivory),transparent);pointer-events:none;
+}
+.hero-veil{position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none}
+.hero-inner{position:relative;z-index:3;max-width:52rem;padding-inline:1.5rem}
+.hero h1{
+  font-size:clamp(2.9rem,8.2vw,6.4rem);line-height:1.02;margin:1.6rem 0 0;letter-spacing:-.01em;
+}
+.hero h1 em{font-style:italic;color:var(--champagne)}
+.hero p{
+  margin:1.9rem auto 0;max-width:34rem;color:hsl(38 40% 95% / .78);
+  font-size:clamp(.95rem,1.5vw,1.08rem);line-height:1.9;
+}
+.hero .eyebrow{color:var(--champagne)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:2.8rem}
+.link-cta{border-color:transparent!important;text-decoration:underline;text-underline-offset:6px}
+.scroll-hint{
+  position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);z-index:4;
+  font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:hsl(38 40% 95% / .55);
+  display:flex;flex-direction:column;align-items:center;gap:.7rem;
+}
+.scroll-hint i{display:block;width:1px;height:46px;background:linear-gradient(to bottom,var(--champagne),transparent);animation:drip 2.6s ease-in-out infinite}
+@keyframes drip{0%,100%{opacity:.3;transform:scaleY(.5)}50%{opacity:1;transform:scaleY(1)}}
+
+/* ---------- strip ---------- */
+.strip{border-block:1px solid var(--line);background:var(--cream);position:relative;z-index:5}
+.strip .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);width:min(1200px,100%)}
+.strip .cell{background:var(--cream);padding:2.6rem 1.4rem;text-align:center}
+.strip .num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;line-height:1;color:var(--gold-deep)}
+.strip .lbl{font-size:.63rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-top:.7rem}
+
+/* ---------- sections ---------- */
+section{padding:clamp(5rem,11vw,9.5rem) 0}
+.head{max-width:44rem}
+.head.center{margin-inline:auto;text-align:center}
+.head h2{font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.12;margin:1.1rem 0 0}
+.head h2 em{font-style:italic;color:var(--gold-deep)}
+.head p{color:var(--muted);margin-top:1.2rem;font-size:1.02rem}
+
+/* ---------- collection ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:clamp(1.2rem,2.6vw,2.2rem);margin-top:4rem}
+.card{background:var(--cream);border:1px solid var(--line);border-radius:2px;overflow:hidden;transition:.6s cubic-bezier(.2,.7,.3,1)}
+.card:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:var(--champagne)}
+.card figure{margin:0;position:relative;aspect-ratio:3/4;overflow:hidden}
+.card figure svg{width:100%;height:100%;transition:transform .8s cubic-bezier(.2,.7,.3,1)}
+.card:hover figure svg{transform:scale(1.045)}
+.card .tag{
+  position:absolute;top:1rem;left:1rem;z-index:2;background:hsl(38 44% 97% / .9);
+  padding:.4rem .8rem;font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);
+}
+.card .body{padding:1.6rem 1.5rem 1.9rem;border-top:1px solid var(--line);background:var(--ivory)}
+.card h3{font-size:1.75rem;margin:0;line-height:1.2}
+.card .meta{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:.45rem}
+.card .foot{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-top:1.2rem;padding-top:1.1rem;border-top:1px solid var(--line)}
+.card .price{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--ink)}
+.card .more{font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);white-space:nowrap}
+
+/* ---------- promise ---------- */
+.promise{background:var(--cream);border-block:1px solid var(--line)}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(2rem,4vw,3.5rem);margin-top:4rem}
+.pillar{text-align:center}
+.pillar .ic{width:56px;height:56px;margin:0 auto 1.4rem;color:var(--gold-deep)}
+.pillar h3{font-size:1.55rem;margin:0 0 .6rem}
+.pillar p{color:var(--muted);margin:0;font-size:.95rem}
+
+/* ---------- split ---------- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,6vw,5.5rem);align-items:center}
+.split h2{font-size:clamp(2.1rem,4.4vw,3.2rem);line-height:1.14;margin:1.1rem 0 0}
+.split h2 em{font-style:italic;color:var(--gold-deep)}
+.split .frame{
+  position:relative;aspect-ratio:4/5;border:1px solid var(--line);
+  background:linear-gradient(160deg,var(--blush),var(--cream) 55%,var(--sand));
+  display:grid;place-items:center;overflow:hidden;
+}
+.split .frame::before{content:'';position:absolute;inset:14px;border:1px solid hsl(36 32% 57% / .35);pointer-events:none}
+.split .frame svg{width:78%;height:auto}
+.split .frame.square{aspect-ratio:1/1;background:linear-gradient(150deg,var(--cream),var(--blush) 60%,var(--sand))}
+.body-copy{color:var(--muted)}
+.steps{list-style:none;margin:2.6rem 0 0;padding:0;counter-reset:s}
+.steps li{counter-increment:s;padding:1.5rem 0 1.5rem 4.2rem;border-top:1px solid var(--line);position:relative}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.steps li::before{
+  content:'0' counter(s);position:absolute;left:0;top:1.45rem;
+  font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold);
+}
+.steps b{display:block;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.4rem;margin-bottom:.15rem}
+.steps span{color:var(--muted);font-size:.94rem}
+
+/* ---------- testimonials ---------- */
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:clamp(1.5rem,3vw,2.6rem);margin-top:4rem}
+.quote{background:var(--ivory);border:1px solid var(--line);padding:2.6rem 2.1rem;border-radius:2px;margin:0}
+.quote .mark{font-family:'Cormorant Garamond',serif;font-size:4.5rem;line-height:.6;color:var(--champagne);display:block;height:1.6rem}
+.quote p{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;line-height:1.6;color:var(--ink);margin:1rem 0 1.6rem}
+.quote cite{font-style:normal;font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- visit ---------- */
+.visit{background:radial-gradient(120% 120% at 20% 0%, hsl(30 14% 30%), hsl(28 14% 16%));color:var(--ivory)}
+.visit .head h2 em{color:var(--champagne)}
+.visit .head p{color:hsl(38 40% 95% / .72)}
+.visit .eyebrow{color:var(--champagne)}
+.visit-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(2.5rem,6vw,5rem);align-items:start;margin-top:3.5rem}
+.info dl{margin:0;display:grid;gap:1.7rem}
+.info dt{font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--champagne)}
+.info dd{margin:.45rem 0 0;font-family:'Cormorant Garamond',serif;font-size:1.35rem;line-height:1.5;color:hsl(38 40% 96% / .92)}
+form{display:grid;gap:1.1rem}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+.field{display:grid;gap:.5rem}
+.field label{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:hsl(38 40% 95% / .6)}
+.field input,.field textarea,.field select{
+  background:transparent;border:0;border-bottom:1px solid hsl(38 40% 95% / .28);
+  color:var(--ivory);font-family:'Jost',sans-serif;font-weight:300;font-size:.98rem;
+  padding:.65rem 0;outline:none;transition:border-color .4s;border-radius:0;width:100%;
+}
+.field input::placeholder,.field textarea::placeholder{color:hsl(38 40% 95% / .35)}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--champagne)}
+.field textarea{resize:vertical;min-height:74px}
+.field select option{color:var(--ink)}
+form .btn{margin-top:.8rem;justify-self:start}
+.note{font-size:.75rem;color:hsl(38 40% 95% / .5);margin:0}
+
+/* ---------- footer ---------- */
+footer{background:var(--ivory);padding:4.5rem 0 2.5rem;border-top:1px solid var(--line)}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:3rem}
+.fbrand{font-family:'Cormorant Garamond',serif;font-size:1.5rem;letter-spacing:.3em;text-transform:uppercase}
+.fgrid p{color:var(--muted);font-size:.9rem;max-width:24rem}
+.fcol h4{font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-deep);margin:0 0 1.1rem;font-family:'Jost',sans-serif;font-weight:400}
+.fcol a{display:block;color:var(--muted);font-size:.92rem;padding:.3rem 0;transition:color .3s}
+.fcol a:hover{color:var(--ink)}
+.fbot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-top:3.5rem;padding-top:1.8rem;border-top:1px solid var(--line);font-size:.75rem;color:var(--muted)}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(26px);transition:opacity 1s cubic-bezier(.2,.7,.3,1),transform 1s cubic-bezier(.2,.7,.3,1)}
+.rv.in{opacity:1;transform:none}
+
+/* ---------- responsive ---------- */
+@media(max-width:900px){
+  .split,.visit-grid,.fgrid{grid-template-columns:1fr}
+  .strip .wrap{grid-template-columns:1fr 1fr}
+  .menu{
+    position:fixed;inset:0;background:var(--ivory);flex-direction:column;justify-content:center;
+    gap:2rem;transform:translateY(-100%);transition:transform .6s cubic-bezier(.2,.7,.3,1);
+  }
+  .menu.open{transform:none}
+  .menu a{color:var(--ink)!important;font-size:1.05rem;letter-spacing:.28em}
+  .burger{display:block;z-index:70}
+  .nav>.btn{display:none}
+}
+@media(max-width:560px){
+  .row{grid-template-columns:1fr}
+  .strip .wrap{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="brand" href="#top">Éliane<small>Bridal Atelier</small></a>
+    <nav class="menu" id="menu">
+      <a href="#collection">Collection</a>
+      <a href="#atelier">The Atelier</a>
+      <a href="#experience">Experience</a>
+      <a href="#brides">Brides</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a class="btn" href="#visit">Book a Fitting</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <svg class="hero-veil" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="vg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#E8DCCB" stop-opacity=".22"/>
+        <stop offset="100%" stop-color="#E8DCCB" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="vg2" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#F1E4E0" stop-opacity=".16"/>
+        <stop offset="100%" stop-color="#B99B6B" stop-opacity=".05"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="720" cy="120" rx="760" ry="440" fill="url(#vg)"/>
+    <path d="M0,700 C260,600 420,820 720,760 C1010,700 1180,860 1440,780 L1440,900 L0,900 Z" fill="url(#vg2)"/>
+    <g stroke="#E8DCCB" stroke-opacity=".16" fill="none">
+      <path d="M120,0 C260,240 200,520 340,900"/>
+      <path d="M1320,0 C1180,240 1240,520 1100,900"/>
+      <path d="M420,0 C520,300 480,600 560,900" stroke-opacity=".09"/>
+      <path d="M1020,0 C920,300 960,600 880,900" stroke-opacity=".09"/>
+    </g>
+  </svg>
+
+  <div class="hero-inner rv">
+    <p class="eyebrow">Bridal Atelier · Established 2012</p>
+    <h1>Modest by design.<br><em>Radiant</em> by nature.</h1>
+    <p>Hand-finished gowns for the bride who wants to be seen for herself. Full coverage, exquisite fabric, and a silhouette cut for no one else.</p>
+    <div class="hero-cta">
+      <a class="btn light" href="#visit">Book a Private Fitting</a>
+      <a class="btn light link-cta" href="#collection">View the Collection</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint"><span>Scroll</span><i></i></div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="wrap">
+    <div class="cell rv"><div class="num">13</div><div class="lbl">Years of Atelier</div></div>
+    <div class="cell rv"><div class="num">900+</div><div class="lbl">Brides Dressed</div></div>
+    <div class="cell rv"><div class="num">100%</div><div class="lbl">Made to Measure</div></div>
+    <div class="cell rv"><div class="num">4–6</div><div class="lbl">Months Lead Time</div></div>
+  </div>
+</div>
+
+<!-- COLLECTION -->
+<section id="collection">
+  <div class="wrap">
+    <div class="head center rv">
+      <p class="eyebrow">The Collection</p>
+      <h2>Signature gowns, <em>quietly</em> extraordinary.</h2>
+      <div class="rule center"></div>
+      <p>Every silhouette in the house collection is designed with full sleeves, a closed neckline and a lined bodice — then tailored to your measurements, your fabric, your day.</p>
+    </div>
+
+    <div class="grid">
+
+      <article class="card rv">
+        <figure>
+          <span class="tag">A-Line</span>
+          <svg viewBox="0 0 300 420" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Aurélie, A-line gown with illusion sleeves">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F7F1E8"/><stop offset="100%" stop-color="#E8DCCB"/></linearGradient>
+              <linearGradient id="s1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FDFBF7"/><stop offset="100%" stop-color="#EFE5D6"/></linearGradient>
+            </defs>
+            <rect width="300" height="420" fill="url(#g1)"/>
+            <ellipse cx="150" cy="196" rx="118" ry="150" fill="#fff" opacity=".42"/>
+            <g stroke="#B99B6B" stroke-width="1" stroke-opacity=".5" fill="url(#s1)">
+              <path d="M133 195 L78 400 Q150 416 222 400 L167 195 Z"/>
+              <path d="M118 98 C104 132 96 182 96 228 L110 233 C114 184 122 140 132 108 Z"/>
+              <path d="M182 98 C196 132 204 182 204 228 L190 233 C186 184 178 140 168 108 Z"/>
+              <path d="M118 96 L133 197 L167 197 L182 96 C170 87 130 87 118 96 Z"/>
+              <path d="M138 78 h24 v20 h-24 Z"/>
+            </g>
+            <g stroke="#B99B6B" stroke-opacity=".32" fill="none" stroke-width=".8">
+              <path d="M126 232 L104 400"/><path d="M150 232 L150 410"/><path d="M174 232 L196 400"/>
+              <path d="M133 120 h34"/><path d="M136 150 h28"/>
+            </g>
+            <circle cx="150" cy="66" r="15" fill="#EFE5D6" stroke="#B99B6B" stroke-opacity=".4"/>
+          </svg>
+        </figure>
+        <div class="body">
+          <h3>Aurélie</h3>
+          <div class="meta">Illusion Sleeve · Chantilly Lace</div>
+          <div class="foot"><span class="price">From $2,480</span><span class="more">Enquire →</span></div>
+        </div>
+      </article>
+
+      <article class="card rv">
+        <figure>
+          <span class="tag">Ballgown</span>
+          <svg viewBox="0 0 300 420" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Séraphine, high-neck ballgown in silk mikado">
+            <defs>
+              <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F6EEEA"/><stop offset="100%" stop-color="#EADFD3"/></linearGradient>
+              <linearGradient id="s2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFFDFA"/><stop offset="100%" stop-color="#F0E6DA"/></linearGradient>
+            </defs>
+            <rect width="300" height="420" fill="url(#g2)"/>
+            <ellipse cx="150" cy="210" rx="126" ry="152" fill="#fff" opacity=".4"/>
+            <g stroke="#B99B6B" stroke-width="1" stroke-opacity=".5" fill="url(#s2)">
+              <path d="M132 188 C110 240 68 330 54 398 Q150 422 246 398 C232 330 190 240 168 188 Z"/>
+              <path d="M118 98 C102 130 94 178 96 224 L111 228 C114 180 122 138 132 108 Z"/>
+              <path d="M182 98 C198 130 206 178 204 224 L189 228 C186 180 178 138 168 108 Z"/>
+              <path d="M118 96 L132 190 L168 190 L182 96 C170 87 130 87 118 96 Z"/>
+              <path d="M137 72 h26 v26 h-26 Z"/>
+            </g>
+            <g stroke="#B99B6B" stroke-opacity=".28" fill="none" stroke-width=".8">
+              <path d="M136 196 C120 260 88 340 74 398"/>
+              <path d="M150 196 C150 270 150 340 150 412"/>
+              <path d="M164 196 C180 260 212 340 226 398"/>
+            </g>
+            <circle cx="150" cy="60" r="14" fill="#F0E6DA" stroke="#B99B6B" stroke-opacity=".4"/>
+          </svg>
+        </figure>
+        <div class="body">
+          <h3>Séraphine</h3>
+          <div class="meta">High Neck · Silk Mikado</div>
+          <div class="foot"><span class="price">From $3,150</span><span class="more">Enquire →</span></div>
+        </div>
+      </article>
+
+      <article class="card rv">
+        <figure>
+          <span class="tag">Sheath</span>
+          <svg viewBox="0 0 300 420" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Noor, long-sleeve crepe sheath gown">
+            <defs>
+              <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F4F1EC"/><stop offset="100%" stop-color="#E4DCD0"/></linearGradient>
+              <linearGradient id="s3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FDFCF9"/><stop offset="100%" stop-color="#EDE6DB"/></linearGradient>
+            </defs>
+            <rect width="300" height="420" fill="url(#g3)"/>
+            <rect x="46" y="46" width="208" height="330" fill="#fff" opacity=".36"/>
+            <g stroke="#B99B6B" stroke-width="1" stroke-opacity=".5" fill="url(#s3)">
+              <path d="M166 240 L206 402 Q186 410 172 400 Z" fill="#F5EEE4"/>
+              <path d="M134 195 L120 398 Q150 410 180 398 L166 195 Z"/>
+              <path d="M118 98 C110 134 106 184 106 230 L119 234 C122 186 126 142 132 110 Z"/>
+              <path d="M182 98 C190 134 194 184 194 230 L181 234 C178 186 174 142 168 110 Z"/>
+              <path d="M118 96 L134 197 L166 197 L182 96 C170 87 130 87 118 96 Z"/>
+              <path d="M138 74 h24 v24 h-24 Z"/>
+            </g>
+            <g stroke="#B99B6B" stroke-opacity=".3" fill="none" stroke-width=".8">
+              <path d="M150 200 L150 404"/><path d="M124 130 C140 142 160 142 176 130"/>
+            </g>
+            <circle cx="150" cy="62" r="14" fill="#EDE6DB" stroke="#B99B6B" stroke-opacity=".4"/>
+          </svg>
+        </figure>
+        <div class="body">
+          <h3>Noor</h3>
+          <div class="meta">Long Sleeve · Heavy Crepe</div>
+          <div class="foot"><span class="price">From $2,240</span><span class="more">Enquire →</span></div>
+        </div>
+      </article>
+
+      <article class="card rv">
+        <figure>
+          <span class="tag">Empire</span>
+          <svg viewBox="0 0 300 420" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Amalia, empire gown with bishop sleeves in pearled tulle">
+            <defs>
+              <linearGradient id="g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F8F0EE"/><stop offset="100%" stop-color="#E8DDD6"/></linearGradient>
+              <linearGradient id="s4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFFDFC"/><stop offset="100%" stop-color="#F1E8E1"/></linearGradient>
+            </defs>
+            <rect width="300" height="420" fill="url(#g4)"/>
+            <circle cx="150" cy="220" r="128" fill="#fff" opacity=".38"/>
+            <g stroke="#B99B6B" stroke-width="1" stroke-opacity=".5" fill="url(#s4)">
+              <path d="M128 162 L86 400 Q150 418 214 400 L172 162 Z"/>
+              <path d="M118 98 C90 128 80 190 96 220 C116 238 140 230 138 220 C124 198 124 138 134 106 Z"/>
+              <path d="M182 98 C210 128 220 190 204 220 C184 238 160 230 162 220 C176 198 176 138 166 106 Z"/>
+              <path d="M118 96 L128 164 L172 164 L182 96 C170 87 130 87 118 96 Z"/>
+              <path d="M138 76 h24 v22 h-24 Z"/>
+            </g>
+            <g fill="#B99B6B" fill-opacity=".35">
+              <circle cx="120" cy="230" r="1.6"/><circle cx="142" cy="252" r="1.6"/><circle cx="168" cy="238" r="1.6"/>
+              <circle cx="108" cy="300" r="1.6"/><circle cx="150" cy="318" r="1.6"/><circle cx="192" cy="292" r="1.6"/>
+              <circle cx="126" cy="358" r="1.6"/><circle cx="178" cy="366" r="1.6"/>
+            </g>
+            <g stroke="#B99B6B" stroke-opacity=".26" fill="none" stroke-width=".8">
+              <path d="M132 170 L100 400"/><path d="M150 170 L150 412"/><path d="M168 170 L200 400"/>
+            </g>
+            <circle cx="150" cy="64" r="14" fill="#F1E8E1" stroke="#B99B6B" stroke-opacity=".4"/>
+          </svg>
+        </figure>
+        <div class="body">
+          <h3>Amalia</h3>
+          <div class="meta">Bishop Sleeve · Pearled Tulle</div>
+          <div class="foot"><span class="price">From $2,890</span><span class="more">Enquire →</span></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROMISE -->
+<section class="promise">
+  <div class="wrap">
+    <div class="head center rv">
+      <p class="eyebrow">Our Promise</p>
+      <h2>Coverage is never a <em>compromise</em>.</h2>
+      <div class="rule center"></div>
+    </div>
+    <div class="pillars">
+      <div class="pillar rv">
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5 L40 12 v12c0 10-7 17-16 20-9-3-16-10-16-20V12Z"/><path d="M17 24l5 5 9-10"/></svg>
+        <h3>Modest, by default</h3>
+        <p>Sleeves, closed necklines and full linings are standard on every gown — never an alteration you have to argue for.</p>
+      </div>
+      <div class="pillar rv">
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6v13a10 10 0 0 0 20 0V6"/><path d="M9 42h30"/><path d="M24 29v13"/><path d="M14 6h20"/></svg>
+        <h3>Cut for you alone</h3>
+        <p>Every gown is patterned to your own measurements in our atelier. Nothing is pulled off a rail and pinned to fit.</p>
+      </div>
+      <div class="pillar rv">
+        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4l4.6 12.4L41 21l-12.4 4.6L24 38l-4.6-12.4L7 21l12.4-4.6Z"/><circle cx="38" cy="38" r="4"/></svg>
+        <h3>Finished by hand</h3>
+        <p>Hems, beading and buttons are worked by hand — an average of 140 hours from first sketch to final press.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ATELIER -->
+<section id="atelier">
+  <div class="wrap split">
+    <div class="frame rv">
+      <svg viewBox="0 0 300 380" role="img" aria-label="Atelier illustration: a dress form">
+        <g stroke="#B99B6B" stroke-opacity=".55" fill="none" stroke-width="1.2">
+          <path d="M150 40 C120 60 112 100 118 130 C124 162 108 190 108 214 C108 250 128 268 150 268 C172 268 192 250 192 214 C192 190 176 162 182 130 C188 100 180 60 150 40 Z" fill="#FFFDFA" fill-opacity=".8"/>
+          <path d="M150 268 L150 340"/><path d="M118 348 h64"/>
+          <path d="M124 140 h52"/><path d="M120 176 h60"/>
+          <path d="M150 44 L150 268" stroke-opacity=".3"/>
+          <circle cx="150" cy="308" r="9"/>
+        </g>
+      </svg>
+    </div>
+    <div class="rv">
+      <p class="eyebrow">The Atelier</p>
+      <h2>A small house, <em>by choice</em>.</h2>
+      <div class="rule"></div>
+      <p class="body-copy">Éliane began in a single room above a fabric merchant, with one seamstress and one belief: that a bride should never have to choose between her values and her dress. Thirteen years on, we still take a limited number of brides each season — because a gown made properly cannot be made quickly.</p>
+      <p class="body-copy">Fabrics are sourced from mills in Como and Calais. Patterns are drafted in-house. And the woman who fits you at your first appointment is the same one who presses your gown before it leaves us.</p>
+      <a class="btn ghost" href="#visit" style="margin-top:1.6rem">Meet the Atelier</a>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="padding-top:0">
+  <div class="wrap split">
+    <div class="rv">
+      <p class="eyebrow">The Experience</p>
+      <h2>Four appointments, <em>one gown</em>.</h2>
+      <ol class="steps">
+        <li><b>Consultation</b><span>Ninety private minutes. We talk silhouette, fabric, venue and coverage — and you try on the house collection at your own pace.</span></li>
+        <li><b>Design &amp; Draft</b><span>Your gown is sketched, costed and patterned to your measurements. Sleeve length, neckline and lining are decided here.</span></li>
+        <li><b>Fittings</b><span>Two to three fittings across ten weeks, adjusting drape and length until the gown moves the way you do.</span></li>
+        <li><b>The Reveal</b><span>Final press, veil styling and a full dressing rehearsal, so nothing about the morning is a surprise.</span></li>
+      </ol>
+    </div>
+    <div class="frame square rv">
+      <svg viewBox="0 0 300 300" role="img" aria-label="Hand-stitch detail">
+        <g stroke="#B99B6B" stroke-opacity=".5" fill="none" stroke-width="1.1">
+          <circle cx="150" cy="150" r="96"/>
+          <circle cx="150" cy="150" r="72" stroke-opacity=".3"/>
+          <path d="M78 150 C110 118 190 182 222 150"/>
+          <path d="M78 174 C110 142 190 206 222 174" stroke-opacity=".35"/>
+          <path d="M78 126 C110 94 190 158 222 126" stroke-opacity=".35"/>
+        </g>
+        <g fill="#B99B6B" fill-opacity=".4">
+          <circle cx="150" cy="54" r="2.4"/><circle cx="246" cy="150" r="2.4"/>
+          <circle cx="150" cy="246" r="2.4"/><circle cx="54" cy="150" r="2.4"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- BRIDES -->
+<section id="brides" class="promise">
+  <div class="wrap">
+    <div class="head center rv">
+      <p class="eyebrow">Our Brides</p>
+      <h2>In their <em>own</em> words.</h2>
+      <div class="rule center"></div>
+    </div>
+    <div class="quotes">
+      <figure class="quote rv"><span class="mark">&ldquo;</span>
+        <p>I visited four salons before Éliane, and every one of them handed me a shawl. Here, the sleeves were already there.</p>
+        <cite>Rivka M. · Manchester</cite></figure>
+      <figure class="quote rv"><span class="mark">&ldquo;</span>
+        <p>The fit was so exact that I forgot I was wearing something made for me. I danced for five hours and never once adjusted it.</p>
+        <cite>Talia B. · Antwerp</cite></figure>
+      <figure class="quote rv"><span class="mark">&ldquo;</span>
+        <p>My mother's lace was worked into the cuffs. They did it without being asked twice, and without charging me for the sentiment.</p>
+        <cite>Naomi K. · Golders Green</cite></figure>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section id="visit" class="visit">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="eyebrow">Visit the Salon</p>
+      <h2>Come and be <em>measured</em>.</h2>
+      <div class="rule"></div>
+      <p>Appointments are private and by request only — one bride in the salon at a time. Tell us your date and we will find you an hour.</p>
+    </div>
+
+    <div class="visit-grid">
+      <div class="info rv">
+        <dl>
+          <div><dt>The Salon</dt><dd>18 Marlowe Court<br>London NW11 8QT</dd></div>
+          <div><dt>Appointments</dt><dd>Sun – Thu · 10:00 – 19:00<br>Friday by arrangement</dd></div>
+          <div><dt>Enquiries</dt><dd>hello@maisoneliane.com<br>+44 20 7946 0182</dd></div>
+        </dl>
+      </div>
+
+      <form class="rv" id="apt" novalidate>
+        <div class="row">
+          <div class="field"><label for="n">Full name</label><input id="n" name="fullname" type="text" placeholder="Your name"></div>
+          <div class="field"><label for="e">Email</label><input id="e" name="email" type="email" placeholder="you@email.com"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="d">Wedding date</label><input id="d" name="date" type="date"></div>
+          <div class="field"><label for="s">Interested in</label>
+            <select id="s" name="style">
+              <option>The house collection</option>
+              <option>A bespoke gown</option>
+              <option>Aurélie</option><option>Séraphine</option><option>Noor</option><option>Amalia</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label for="m">Anything we should know</label><textarea id="m" name="message" placeholder="Venue, coverage preferences, fabrics you love…"></textarea></div>
+        <button class="btn light" type="submit">Request an Appointment</button>
+        <p class="note" id="note">We reply within two working days.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <div class="fbrand">Éliane</div>
+        <p style="margin-top:1rem">Modest bridal couture, made to measure in London since 2012. A small house, deliberately kept small.</p>
+      </div>
+      <div class="fcol">
+        <h4>Explore</h4>
+        <a href="#collection">Collection</a><a href="#atelier">The Atelier</a><a href="#experience">The Experience</a><a href="#brides">Our Brides</a>
+      </div>
+      <div class="fcol">
+        <h4>Salon</h4>
+        <a href="#visit">Book a Fitting</a><a href="#visit">Opening Hours</a><a href="#visit">Bespoke Enquiries</a><a href="#visit">Alterations</a>
+      </div>
+    </div>
+    <div class="fbot">
+      <span>© 2026 Maison Éliane. All rights reserved.</span>
+      <span>Instagram · Pinterest · Privacy</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const hdr = document.getElementById('hdr');
+addEventListener('scroll', () => hdr.classList.toggle('solid', scrollY > 60), { passive: true });
+
+const menu = document.getElementById('menu'), burger = document.getElementById('burger');
+burger.addEventListener('click', () => { menu.classList.toggle('open'); hdr.classList.add('solid'); });
+menu.addEventListener('click', e => { if (e.target.tagName === 'A') menu.classList.remove('open'); });
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach((en, i) => {
+    if (en.isIntersecting) { setTimeout(() => en.target.classList.add('in'), (i % 4) * 90); io.unobserve(en.target); }
+  });
+}, { threshold: .14, rootMargin: '0px 0px -8%' });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+document.getElementById('apt').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target, note = document.getElementById('note');
+  if (!f.fullname.value.trim() || !f.email.value.trim()) { note.textContent = 'Please add your name and email.'; return; }
+  note.textContent = 'Thank you — we have your request and will reply within two working days.';
+  f.reset();
+});
+</script>
+</body>
+</html>
