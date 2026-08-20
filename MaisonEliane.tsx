@@ -41,7 +41,7 @@
  */
 
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
-import { Menu, X, ShieldCheck, Ruler, Sparkles } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -135,21 +135,24 @@ const GOWNS: { key: GownKey; tag: string; name: string; meta: string; price: str
   { key: "empire", tag: "Empire", name: "Amalia", meta: "Bishop Sleeve · Pearled Tulle", price: "From $2,890" },
 ];
 
-const PILLARS = [
+const CODES = [
   {
-    Icon: ShieldCheck,
+    numeral: "I",
+    kicker: "Sleeve & Neckline",
     title: "Modest, by default",
-    copy: "Sleeves, closed necklines and full linings are standard on every gown — never an alteration you have to argue for.",
+    copy: "Sleeves, a closed neckline and a fully lined bodice are drawn into the pattern at the first sketch. Never added afterwards, never a favour, never a surcharge.",
   },
   {
-    Icon: Ruler,
+    numeral: "II",
+    kicker: "Pattern & Fit",
     title: "Cut for you alone",
-    copy: "Every gown is patterned to your own measurements in our atelier. Nothing is pulled off a rail and pinned to fit.",
+    copy: "We draft a fresh pattern to your measurements instead of grading a sample up or down. It is slower and it costs us more — and it is why the gown stays where you left it when you dance.",
   },
   {
-    Icon: Sparkles,
-    title: "Finished by hand",
-    copy: "Hems, beading and buttons are worked by hand — an average of 140 hours from first sketch to final press.",
+    numeral: "III",
+    kicker: "Hand Finishing",
+    title: "Finished at the bench",
+    copy: "Hems, buttons and beadwork are worked by hand, roughly a hundred and forty hours to a gown. A machine is faster. It cannot follow a curve the way a thumb can.",
   },
 ];
 
@@ -401,28 +404,56 @@ export default function MaisonEliane() {
         </div>
       </section>
 
-      {/* PROMISE */}
-      <section className="border-y border-hairline bg-cream py-[clamp(5rem,11vw,9.5rem)]">
-        <div className="mx-auto w-[min(1200px,100%-3rem)]">
-          <Reveal className="mx-auto max-w-[44rem] text-center">
+      {/* PROMISE — the house code */}
+      <section className="relative overflow-hidden border-y border-hairline bg-cream py-[clamp(5rem,11vw,9.5rem)]">
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{ background: "radial-gradient(64% 52% at 84% 8%, hsl(36 32% 57% / .11), transparent 68%)" }}
+        />
+
+        <div className="relative z-10 mx-auto grid w-[min(1200px,100%-3rem)] grid-cols-1 items-start gap-[clamp(3rem,7vw,7rem)] lg:grid-cols-[1fr_1.45fr]">
+          <Reveal className="lg:sticky lg:top-[7.5rem]">
             <Eyebrow>Our Promise</Eyebrow>
-            <h2 className="mt-4 font-serif text-[clamp(2.2rem,5vw,3.6rem)] font-light leading-[1.12]">
+            <h2 className="mt-4 font-serif text-[clamp(2.1rem,4.2vw,3.1rem)] font-light leading-[1.14]">
               Coverage is never a <em className="italic text-gold-deep">compromise</em>.
             </h2>
-            <Rule className="mx-auto" />
+            <Rule />
+            <p className="m-0 max-w-[26rem] text-[0.97rem] text-muted-ink">
+              Three rules the house has kept since the first gown left the room above the fabric merchant. They are not
+              options, and they are not extras.
+            </p>
+            <div className="mt-11 max-w-[26rem] border-t border-hairline pt-7">
+              <div className="font-serif text-[1.85rem] font-normal italic leading-none">Éliane Benhamou</div>
+              <div className="mt-3 text-[0.6rem] uppercase tracking-[0.26em] text-muted-ink">
+                Founder · Head of Atelier
+              </div>
+            </div>
           </Reveal>
 
-          <div className="mt-16 grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-[clamp(2rem,4vw,3.5rem)]">
-            {PILLARS.map(({ Icon, title, copy }, i) => (
-              <Reveal key={title} delay={i * 90}>
-                <div className="text-center">
-                  <Icon className="mx-auto mb-6 h-14 w-14 stroke-[0.9] text-gold-deep" />
-                  <h3 className="mb-2 font-serif text-[1.55rem] font-light">{title}</h3>
-                  <p className="text-[0.95rem] text-muted-ink">{copy}</p>
-                </div>
+          <ol className="m-0 list-none p-0">
+            {CODES.map(({ numeral, kicker, title, copy }, i) => (
+              <Reveal key={numeral} delay={i * 90}>
+                <li
+                  className={`group relative grid grid-cols-[3.4rem_1fr] gap-[1.1rem] border-t border-hairline py-[2.1rem] sm:grid-cols-[5rem_1fr] sm:gap-6 sm:py-10 ${
+                    i === CODES.length - 1 ? "border-b" : ""
+                  }`}
+                >
+                  {/* a gold hairline draws itself across the rule on hover */}
+                  <span className="absolute -top-px left-0 h-px w-0 bg-gold transition-[width] duration-[900ms] ease-[cubic-bezier(.2,.7,.3,1)] group-hover:w-full" />
+                  <span className="font-serif text-[2.3rem] leading-[0.86] tracking-[0.04em] text-gold opacity-50 transition-[opacity,color] duration-500 group-hover:text-gold-deep group-hover:opacity-100 sm:text-[2.9rem]">
+                    {numeral}
+                  </span>
+                  <div>
+                    <span className="mb-[0.65rem] block text-[0.58rem] uppercase tracking-[0.3em] text-gold-deep">
+                      {kicker}
+                    </span>
+                    <h3 className="mb-[0.55rem] font-serif text-[1.62rem] font-light leading-[1.25]">{title}</h3>
+                    <p className="m-0 max-w-[36rem] text-[0.95rem] text-muted-ink">{copy}</p>
+                  </div>
+                </li>
               </Reveal>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 

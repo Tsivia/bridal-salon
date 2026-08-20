@@ -170,13 +170,50 @@ section{padding:clamp(5rem,11vw,9.5rem) 0}
 .card .price{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:var(--ink)}
 .card .more{font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);white-space:nowrap}
 
-/* ---------- promise ---------- */
+/* ---------- cream band (shared by Promise + Brides) ---------- */
 .promise{background:var(--cream);border-block:1px solid var(--line)}
-.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(2rem,4vw,3.5rem);margin-top:4rem}
-.pillar{text-align:center}
-.pillar .ic{width:56px;height:56px;margin:0 auto 1.4rem;color:var(--gold-deep)}
-.pillar h3{font-size:1.55rem;margin:0 0 .6rem}
-.pillar p{color:var(--muted);margin:0;font-size:.95rem}
+
+/* ---------- the house code ---------- */
+.code-band{position:relative;overflow:hidden}
+.code-band::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(64% 52% at 84% 8%, hsl(36 32% 57% / .11), transparent 68%);
+}
+.code-band > .wrap{position:relative;z-index:1}
+.code-grid{display:grid;grid-template-columns:1fr 1.45fr;gap:clamp(3rem,7vw,7rem);align-items:start}
+
+.code-aside h2{font-size:clamp(2.1rem,4.2vw,3.1rem);line-height:1.14;margin:1.1rem 0 0}
+.code-aside h2 em{font-style:italic;color:var(--gold-deep)}
+.code-aside p{color:var(--muted);font-size:.97rem;max-width:26rem;margin:0}
+.sign{margin-top:2.8rem;padding-top:1.7rem;border-top:1px solid var(--line);max-width:26rem}
+.sign .name{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:1.85rem;line-height:1;color:var(--ink)}
+.sign .role{font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);margin-top:.75rem}
+
+.codes{list-style:none;margin:0;padding:0}
+.codes li{
+  position:relative;display:grid;grid-template-columns:5rem 1fr;gap:1.6rem;
+  padding:2.5rem 0;border-top:1px solid var(--line);
+}
+.codes li:last-child{border-bottom:1px solid var(--line)}
+/* a gold hairline draws itself across the rule on hover */
+.codes li::after{
+  content:'';position:absolute;top:-1px;left:0;height:1px;width:0;background:var(--gold);
+  transition:width .9s cubic-bezier(.2,.7,.3,1);
+}
+.codes li:hover::after{width:100%}
+.codes .num{
+  font-family:'Cormorant Garamond',serif;font-size:2.9rem;line-height:.86;
+  color:var(--gold);opacity:.5;letter-spacing:.04em;
+  transition:opacity .5s ease,color .5s ease;
+}
+.codes li:hover .num{opacity:1;color:var(--gold-deep)}
+.codes .kicker{
+  display:block;font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold-deep);margin-bottom:.65rem;
+}
+.codes h3{font-size:1.62rem;margin:0 0 .55rem;line-height:1.25}
+.codes p{color:var(--muted);margin:0;font-size:.95rem;max-width:36rem}
+@media(min-width:901px){.code-aside{position:sticky;top:7.5rem}}
 
 /* ---------- split ---------- */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,6vw,5.5rem);align-items:center}
@@ -249,7 +286,10 @@ footer{background:var(--ivory);padding:4.5rem 0 2.5rem;border-top:1px solid var(
 
 /* ---------- responsive ---------- */
 @media(max-width:900px){
-  .split,.visit-grid,.fgrid{grid-template-columns:1fr}
+  .split,.visit-grid,.fgrid,.code-grid{grid-template-columns:1fr}
+  .code-aside .sign{margin-bottom:.5rem}
+  .codes li{grid-template-columns:3.4rem 1fr;gap:1.1rem;padding:2.1rem 0}
+  .codes .num{font-size:2.3rem}
   .strip .wrap{grid-template-columns:1fr 1fr}
   .menu{
     position:fixed;inset:0;background:var(--ivory);flex-direction:column;justify-content:center;
@@ -377,30 +417,47 @@ footer{background:var(--ivory);padding:4.5rem 0 2.5rem;border-top:1px solid var(
 </section>
 
 <!-- PROMISE -->
-<section class="promise">
-  <div class="wrap">
-    <div class="head center rv">
+<section class="promise code-band">
+  <div class="wrap code-grid">
+
+    <div class="code-aside rv">
       <p class="eyebrow">Our Promise</p>
       <h2>Coverage is never a <em>compromise</em>.</h2>
-      <div class="rule center"></div>
-    </div>
-    <div class="pillars">
-      <div class="pillar rv">
-        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5 L40 12 v12c0 10-7 17-16 20-9-3-16-10-16-20V12Z"/><path d="M17 24l5 5 9-10"/></svg>
-        <h3>Modest, by default</h3>
-        <p>Sleeves, closed necklines and full linings are standard on every gown — never an alteration you have to argue for.</p>
-      </div>
-      <div class="pillar rv">
-        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6v13a10 10 0 0 0 20 0V6"/><path d="M9 42h30"/><path d="M24 29v13"/><path d="M14 6h20"/></svg>
-        <h3>Cut for you alone</h3>
-        <p>Every gown is patterned to your own measurements in our atelier. Nothing is pulled off a rail and pinned to fit.</p>
-      </div>
-      <div class="pillar rv">
-        <svg class="ic" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4l4.6 12.4L41 21l-12.4 4.6L24 38l-4.6-12.4L7 21l12.4-4.6Z"/><circle cx="38" cy="38" r="4"/></svg>
-        <h3>Finished by hand</h3>
-        <p>Hems, beading and buttons are worked by hand — an average of 140 hours from first sketch to final press.</p>
+      <div class="rule"></div>
+      <p>Three rules the house has kept since the first gown left the room above the fabric merchant. They are not options, and they are not extras.</p>
+      <div class="sign">
+        <div class="name">Éliane Benhamou</div>
+        <div class="role">Founder · Head of Atelier</div>
       </div>
     </div>
+
+    <ol class="codes">
+      <li class="rv">
+        <span class="num">I</span>
+        <div>
+          <span class="kicker">Sleeve &amp; Neckline</span>
+          <h3>Modest, by default</h3>
+          <p>Sleeves, a closed neckline and a fully lined bodice are drawn into the pattern at the first sketch. Never added afterwards, never a favour, never a surcharge.</p>
+        </div>
+      </li>
+      <li class="rv">
+        <span class="num">II</span>
+        <div>
+          <span class="kicker">Pattern &amp; Fit</span>
+          <h3>Cut for you alone</h3>
+          <p>We draft a fresh pattern to your measurements instead of grading a sample up or down. It is slower and it costs us more — and it is why the gown stays where you left it when you dance.</p>
+        </div>
+      </li>
+      <li class="rv">
+        <span class="num">III</span>
+        <div>
+          <span class="kicker">Hand Finishing</span>
+          <h3>Finished at the bench</h3>
+          <p>Hems, buttons and beadwork are worked by hand, roughly a hundred and forty hours to a gown. A machine is faster. It cannot follow a curve the way a thumb can.</p>
+        </div>
+      </li>
+    </ol>
+
   </div>
 </section>
 
