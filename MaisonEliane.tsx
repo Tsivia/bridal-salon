@@ -25,10 +25,16 @@
  * },
  * fontFamily: { serif: ['"Cormorant Garamond"', 'Georgia', 'serif'], sans: ['Jost', 'system-ui', 'sans-serif'] },
  *
- * ── assets ────────────
+ * ── assets ───────────────────────────────────────────────────────────────────
  * Copy the 7 files from images/ into the project as public/images/
  * (hero.jpg, gown-aurelie.jpg, gown-seraphine.jpg, gown-noor.jpg,
- * gown-amalia.jpg, atelier.jpg, detail.jpg). Photography: Unsplash License.
+ * gown-amalia.jpg, atelier.jpg, detail.jpg). Imagery generated with Seedream 5 Pro.
+ *
+ * ── enquiries ────────────────────────────────────────────────────────────────
+ * The booking form writes to the `enquiries` table in Supabase. RLS allows the
+ * publishable key to INSERT only — it cannot read anyone's details back.
+ * Reading goes through the `get_enquiries(p_password)` database function, which
+ * the static admin page (admin.html) calls. The password lives in the database.
  *
  * ── index.html <head> ────────────────────────────────────────────────────────
  * <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -39,6 +45,10 @@ import { Menu, X, ShieldCheck, Ruler, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+
+/* Supabase — safe to publish: RLS lets this key INSERT enquiries and nothing else. */
+const SUPABASE_URL = "https://jclvyahmxbxveebzvaqi.supabase.co";
+const SUPABASE_KEY = "sb_publishable_F5ghtfOBBNu9bzyR7PIBnw_xssmSwV2";
 
 /* ── scroll reveal ─────────────────────────────────────────────────────────── */
 function Reveal({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
@@ -161,6 +171,7 @@ export default function MaisonEliane() {
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
   const [note, setNote] = useState("We reply within two working days.");
+  const [sending, setSending] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 60);
@@ -169,15 +180,48 @@ export default function MaisonEliane() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    if (!String(data.get("fullname") ?? "").trim() || !String(data.get("email") ?? "").trim()) {
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    const fullName = String(data.get("fullname") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    if (!fullName || !email) {
       setNote("Please add your name and email.");
       return;
     }
-    setNote("Thank you — we have your request and will reply within two working days.");
-    e.currentTarget.reset();
+
+    setSending(true);
+    setNote("Sending…");
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/enquiries`, {
+        method: "POST",
+        headers: {
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${SUPABASE_KEY}`,
+          "Content-Type": "application/json",
+          Prefer: "return=minimal",
+        },
+        body: JSON.stringify({
+          full_name: fullName,
+          email,
+          wedding_date: String(data.get("date") ?? "") || null,
+          style: String(data.get("style") ?? ""),
+          message: String(data.get("message") ?? "").trim() || null,
+        }),
+      });
+      if (!res.ok) throw new Error(`${res.status} ${await res.text()}`);
+
+      setNote("Thank you — we have your request and will reply within two working days.");
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      setNote("We could not send that just now. Please email hello@maisoneliane.com instead.");
+    } finally {
+      setSending(false);
+    }
   };
 
   const onLight = !solid && !open;
@@ -539,7 +583,7 @@ export default function MaisonEliane() {
                   <Textarea name="message" placeholder="Venue, coverage preferences, fabrics you love…" className="min-h-[74px] resize-y rounded-none border-0 border-b border-ivory/30 bg-transparent px-0 py-3 text-ivory placeholder:text-ivory/35 focus-visible:border-champagne focus-visible:ring-0 focus-visible:ring-offset-0" />
                 </label>
 
-                <Button type="submit" className="mt-3 justify-self-start rounded-sm border border-ivory/50 bg-transparent px-9 py-6 text-[0.72rem] uppercase tracking-[0.22em] text-ivory hover:bg-ivory hover:text-ink">
+                <Button type="submit" disabled={sending} className="mt-3 justify-self-start disabled:opacity-55 rounded-sm border border-ivory/50 bg-transparent px-9 py-6 text-[0.72rem] uppercase tracking-[0.22em] text-ivory hover:bg-ivory hover:text-ink">
                   Request an Appointment
                 </Button>
                 <p className="m-0 text-[0.75rem] text-ivory/50">{note}</p>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Enquiries — Maison Éliane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:hsl(38 44% 97%);
+  --cream:hsl(36 33% 93%);
+  --champagne:hsl(34 30% 78%);
+  --gold-deep:hsl(34 30% 46%);
+  --ink:hsl(30 12% 18%);
+  --muted:hsl(30 8% 42%);
+  --line:hsl(33 22% 84%);
+  --danger:hsl(4 52% 44%);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100dvh;background:var(--ivory);color:var(--ink);
+  font-family:'Jost',system-ui,sans-serif;font-weight:300;line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;margin:0}
+.wrap{width:min(1160px,100% - 3rem);margin-inline:auto}
+
+/* ---------- top bar ---------- */
+.bar{
+  background:hsl(28 14% 16%);color:var(--ivory);
+  padding:1.4rem 0;border-bottom:1px solid hsl(28 14% 26%);
+}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.brand{font-family:'Cormorant Garamond',serif;font-size:1.4rem;letter-spacing:.3em;text-transform:uppercase;line-height:1.1}
+.brand small{display:block;font-family:'Jost',sans-serif;font-size:.53rem;letter-spacing:.4em;opacity:.7;margin-top:.25rem}
+.bar-actions{display:flex;align-items:center;gap:1rem;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase}
+.bar-actions button{
+  background:transparent;border:1px solid hsl(38 44% 97% / .4);color:var(--ivory);
+  font:inherit;letter-spacing:.18em;text-transform:uppercase;padding:.55rem 1.2rem;
+  border-radius:2px;cursor:pointer;transition:.35s;
+}
+.bar-actions button:hover{background:var(--ivory);color:var(--ink);border-color:var(--ivory)}
+.bar-actions a{color:hsl(38 44% 97% / .7);text-decoration:none}
+.bar-actions a:hover{color:var(--ivory)}
+
+/* ---------- gate ---------- */
+.gate{min-height:calc(100dvh - 5.6rem);display:grid;place-items:center;padding:2rem 1.5rem}
+.gate-card{
+  width:min(26rem,100%);background:var(--cream);border:1px solid var(--line);
+  border-radius:3px;padding:3rem 2.4rem;text-align:center;
+}
+.gate-card .lock{width:38px;height:38px;margin:0 auto 1.4rem;color:var(--gold-deep)}
+.gate-card h1{font-size:2rem;line-height:1.2}
+.gate-card p{color:var(--muted);font-size:.9rem;margin:.6rem 0 2rem}
+.gate-card input{
+  width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);
+  font:inherit;font-size:1.15rem;text-align:center;letter-spacing:.4em;
+  padding:.7rem 0;outline:none;color:var(--ink);transition:border-color .3s;
+}
+.gate-card input:focus{border-color:var(--gold-deep)}
+.gate-card button{
+  width:100%;margin-top:1.8rem;background:var(--ink);color:var(--ivory);
+  border:1px solid var(--ink);font:inherit;font-size:.72rem;letter-spacing:.22em;
+  text-transform:uppercase;padding:.95rem;border-radius:2px;cursor:pointer;transition:.35s;
+}
+.gate-card button:hover:not(:disabled){background:transparent;color:var(--ink)}
+.gate-card button:disabled{opacity:.55;cursor:default}
+.err{color:var(--danger);font-size:.82rem;min-height:1.4rem;margin:1rem 0 0}
+
+/* ---------- table ---------- */
+main{padding:3rem 0 5rem}
+.head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+.head h2{font-size:2.4rem}
+.count{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep)}
+.scroller{overflow-x:auto;border:1px solid var(--line);border-radius:3px;background:var(--cream)}
+table{width:100%;border-collapse:collapse;min-width:860px}
+th{
+  text-align:left;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;
+  font-weight:400;color:var(--gold-deep);padding:1rem 1.2rem;
+  border-bottom:1px solid var(--line);white-space:nowrap;background:var(--cream);
+}
+td{padding:1.1rem 1.2rem;border-bottom:1px solid var(--line);vertical-align:top;font-size:.93rem;background:var(--ivory)}
+tr:last-child td{border-bottom:0}
+td.name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;white-space:nowrap}
+td.when{color:var(--muted);font-size:.82rem;white-space:nowrap}
+td a{color:var(--gold-deep);text-decoration:none}
+td a:hover{text-decoration:underline}
+td.msg{max-width:34rem;color:var(--muted)}
+.dash{color:hsl(33 22% 78%)}
+.empty{padding:4.5rem 2rem;text-align:center;color:var(--muted);background:var(--ivory)}
+.empty .serif{display:block;font-size:1.6rem;color:var(--ink);margin-bottom:.5rem}
+.hidden{display:none}
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<section class="gate" id="gate">
+  <form class="gate-card" id="gateForm">
+    <svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4" y="10.5" width="16" height="11" rx="2"/>
+      <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>
+      <circle cx="12" cy="16" r="1.2"/>
+    </svg>
+    <h1>Enquiries</h1>
+    <p>Maison Éliane — staff only</p>
+    <input id="pass" type="password" inputmode="numeric" placeholder="••••" autocomplete="current-password" autofocus />
+    <button type="submit" id="gateBtn">Unlock</button>
+    <p class="err" id="err"></p>
+  </form>
+</section>
+
+<!-- DASHBOARD -->
+<div id="app" class="hidden">
+  <div class="bar">
+    <div class="wrap">
+      <div class="brand">Éliane<small>Enquiries</small></div>
+      <div class="bar-actions">
+        <a href="index.html">← Back to site</a>
+        <button type="button" id="refresh">Refresh</button>
+        <button type="button" id="lock">Lock</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="wrap">
+      <div class="head">
+        <h2 class="serif">Booking requests</h2>
+        <span class="count" id="count"></span>
+      </div>
+      <div class="scroller" id="scroller"></div>
+    </div>
+  </main>
+</div>
+
+<script src="supabase.js"></script>
+<script>
+const gate = document.getElementById('gate');
+const app = document.getElementById('app');
+const err = document.getElementById('err');
+const passInput = document.getElementById('pass');
+const gateBtn = document.getElementById('gateBtn');
+
+let password = null;
+
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+
+const fmtWhen = iso => new Date(iso).toLocaleString('en-GB', {
+  day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit',
+});
+
+const fmtDate = d => d
+  ? new Date(d + 'T00:00:00').toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+  : '<span class="dash">—</span>';
+
+function render(rows) {
+  document.getElementById('count').textContent =
+    rows.length === 1 ? '1 enquiry' : `${rows.length} enquiries`;
+
+  const scroller = document.getElementById('scroller');
+
+  if (!rows.length) {
+    scroller.innerHTML =
+      '<div class="empty"><span class="serif">No enquiries yet.</span>' +
+      'Requests sent through the booking form will appear here.</div>';
+    return;
+  }
+
+  scroller.innerHTML = `
+    <table>
+      <thead>
+        <tr><th>Received</th><th>Name</th><th>Email</th><th>Wedding date</th><th>Interested in</th><th>Message</th></tr>
+      </thead>
+      <tbody>
+        ${rows.map(r => `
+          <tr>
+            <td class="when">${fmtWhen(r.created_at)}</td>
+            <td class="name">${esc(r.full_name)}</td>
+            <td><a href="mailto:${esc(r.email)}">${esc(r.email)}</a></td>
+            <td>${fmtDate(r.wedding_date)}</td>
+            <td>${r.style ? esc(r.style) : '<span class="dash">—</span>'}</td>
+            <td class="msg">${r.message ? esc(r.message) : '<span class="dash">—</span>'}</td>
+          </tr>`).join('')}
+      </tbody>
+    </table>`;
+}
+
+async function load() {
+  const rows = await fetchEnquiries(password);
+  render(rows);
+}
+
+document.getElementById('gateForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  err.textContent = '';
+  gateBtn.disabled = true;
+  gateBtn.textContent = 'Checking…';
+
+  try {
+    password = passInput.value;
+    await load();
+    gate.classList.add('hidden');
+    app.classList.remove('hidden');
+  } catch (ex) {
+    password = null;
+    err.textContent = ex.message === 'unauthorized'
+      ? 'That password is not right.'
+      : 'Could not reach the database. Check your connection.';
+    passInput.value = '';
+    passInput.focus();
+  } finally {
+    gateBtn.disabled = false;
+    gateBtn.textContent = 'Unlock';
+  }
+});
+
+document.getElementById('refresh').addEventListener('click', async e => {
+  e.target.textContent = 'Refreshing…';
+  try { await load(); } catch { /* keep the current view */ }
+  e.target.textContent = 'Refresh';
+});
+
+document.getElementById('lock').addEventListener('click', () => {
+  password = null;
+  app.classList.add('hidden');
+  gate.classList.remove('hidden');
+  passInput.value = '';
+  passInput.focus();
+});
+</script>
+</body>
+</html>

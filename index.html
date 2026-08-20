@@ -527,6 +527,7 @@ footer{background:var(--ivory);padding:4.5rem 0 2.5rem;border-top:1px solid var(
   </div>
 </footer>
 
+<script src="supabase.js"></script>
 <script>
 const hdr = document.getElementById('hdr');
 addEventListener('scroll', () => hdr.classList.toggle('solid', scrollY > 60), { passive: true });
@@ -542,12 +543,34 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: .14, rootMargin: '0px 0px -8%' });
 document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
-document.getElementById('apt').addEventListener('submit', e => {
+document.getElementById('apt').addEventListener('submit', async e => {
   e.preventDefault();
-  const f = e.target, note = document.getElementById('note');
-  if (!f.fullname.value.trim() || !f.email.value.trim()) { note.textContent = 'Please add your name and email.'; return; }
-  note.textContent = 'Thank you — we have your request and will reply within two working days.';
-  f.reset();
+  const f = e.target, note = document.getElementById('note'), btn = f.querySelector('button[type=submit]');
+  const fullName = f.fullname.value.trim(), email = f.email.value.trim();
+
+  if (!fullName || !email) { note.textContent = 'Please add your name and email.'; return; }
+
+  btn.disabled = true;
+  btn.style.opacity = '.55';
+  note.textContent = 'Sending…';
+
+  try {
+    await submitEnquiry({
+      full_name: fullName,
+      email,
+      wedding_date: f.date.value || null,
+      style: f.style.value,
+      message: f.message.value.trim() || null,
+    });
+    note.textContent = 'Thank you — we have your request and will reply within two working days.';
+    f.reset();
+  } catch (err) {
+    console.error(err);
+    note.textContent = 'We could not send that just now. Please email hello@maisoneliane.com instead.';
+  } finally {
+    btn.disabled = false;
+    btn.style.opacity = '';
+  }
 });
 </script>
 </body>
